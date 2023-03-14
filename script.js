@@ -90,7 +90,8 @@ const btnLogin = document.querySelector('.login__btn');
 const btnTransfer = document.querySelector('.form__btn--transfer');
 const btnLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
-const btnSort = document.querySelector('.btn--sort');
+const btnWithdraw = document.querySelector('.form__btn--withdraw');
+const btnDeposit = document.querySelector('.form__btn--deposit');
 
 const inputLoginUsername = document.querySelector('.login__input--user');
 const inputLoginPin = document.querySelector('.login__input--pin');
@@ -98,6 +99,12 @@ const inputTransferTo = document.querySelector('.form__input--to');
 const loginInput = document.querySelector('.login__input');
 const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
+const inputDepositAmount = document.querySelector(
+  '.form__input--deposit-amount'
+);
+const inputWithdrawAmount = document.querySelector(
+  '.form__input--withdraw-amount'
+);
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 const navHeader = document.querySelector('.nav-header');
@@ -290,6 +297,7 @@ btnLogin.addEventListener('click', function (e) {
   }
 });
 
+// Transfer button
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = +inputTransferAmount.value;
@@ -321,6 +329,7 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+// Loan Button
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -343,6 +352,54 @@ btnLoan.addEventListener('click', function (e) {
     }, 2500);
   }
   inputLoanAmount.value = '';
+});
+
+// Deposit button
+btnDeposit.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = +inputDepositAmount.value;
+
+  if (amount > 0) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    // Add deposit date
+    currentAccount.movementsDates.push(new Date().toISOString());
+
+    // Update UI
+    updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
+  }
+
+  inputDepositAmount.value = '';
+});
+
+// Withdraw button
+btnWithdraw.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = +inputWithdrawAmount.value;
+
+  if (amount > 0 && currentAccount.balance >= amount) {
+    // Add movement
+    currentAccount.movements.push(-amount);
+
+    // Add withdrawal date
+    currentAccount.movementsDates.push(new Date().toISOString());
+
+    // Update UI
+    updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
+  }
+
+  inputWithdrawAmount.value = '';
 });
 
 btnClose.addEventListener('click', function (e) {
