@@ -213,7 +213,7 @@ nav {
   grid-row: 5 / 6;
   display: flex;
   align-items: baseline;
-  padding: 0 0.3rem;
+  padding: 4rem;
   margin-top: 1rem;
   background-color: #b1d1d4;
   z-index: 20;
@@ -241,15 +241,6 @@ nav {
   color: #f5465d;
 }
 
-.btn--sort {
-  margin-left: auto;
-  border: none;
-  background: none;
-  font-size: 1.3rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
 /* OPERATIONS */
 .operation {
   border-radius: 1rem;
@@ -267,6 +258,14 @@ nav {
 
 .operation--close {
   background-image: linear-gradient(to top left, #f5bfd2, #ffeaf1);
+}
+
+.operation--deposit {
+  background-image: linear-gradient(to top left, #7c98ab, #eaece6);
+}
+
+.operation--withdraw {
+  background-image: linear-gradient(to top left, #d9d3d2, #eaeaea);
 }
 
 h2 {
@@ -533,5 +532,9 @@ h2 {
 
   .footer {
     font-size: 12px;
+  }
+
+  .summary {
+    padding: 1rem;
   }
 }
